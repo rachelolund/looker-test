@@ -1,24 +1,17 @@
-connection: "default_bigquery_connection" ###different for customer###
+connection: "default_bigquery_connection" ###UPDATE THIS TO BE THE SAME NAME AS YOUR CONNECTION###
 label: " eCommerce"
-# include: "/queries/queries*.view" # includes all queries refinements
-# include: "/views/**/*.view" # include all the views
-# include: "/gen_ai/**/*.view" # include all the views
-# include: "/dashboards/*.dashboard.lookml" # include all the views
-include: "/**/*.*" # include all the views
+include: "/views/**/*.view" # include all the views
+include: "/dashboards/*.dashboard.lookml" # include all the views
+# include: "/**/*.*" # include all the views, regardless of folder location
 
 ############ Model Configuration #############
 
-# datagroup: ecommerce_etl {
-#   sql_trigger: SELECT max(created_at) FROM ecomm.events ;;
-#   max_cache_age: "24 hours"
-# }
+datagroup: ecommerce_etl_modified {
+  sql_trigger: SELECT MAX(DATE(created_at)) FROM `looker-private-demo.ecomm.events` ;;
+  max_cache_age: "24 hours"
+}
 
-# datagroup: ecommerce_etl_modified {
-#   sql_trigger: SELECT MAX(DATE(created_at)) FROM `looker-private-demo.ecomm.events` ;;
-#   max_cache_age: "24 hours"
-# }
-
-# persist_with: ecommerce_etl_modified
+persist_with: ecommerce_etl_modified
 ############ Base Explores #############
 
 
